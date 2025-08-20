@@ -1,0 +1,3 @@
+[submodule "model/arducam_imx500_model_zoo"]
+	path = model/arducam_imx500_model_zoo
+	url = https://github.com/ArduCAM/arducam_imx500_model_zoo.git
