@@ -37,6 +37,8 @@ Clone this repository and run the following command in the project directory:
 
 ```bash
 git submodule update --init --recursive
+
+cd examples
 # mobilenetv2
 python app.py -pm mobilenetv2
 # mobilenetssd
