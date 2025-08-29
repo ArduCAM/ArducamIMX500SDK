@@ -9,6 +9,7 @@ from postprocess.yolov8n_det import ParserYolov8Det
 from postprocess.yolov8n_pos import parse_yolov8n_pos
 from postprocess.yolov8n_pos_hand import parse_yolov8n_hand_pos
 from postprocess.deeplabv3plus import parse_deeplabv3plus
+from postprocess.only_input_tensor import only_input_tensor
 
 
 pretrain_model_card = {
@@ -108,8 +109,10 @@ if __name__ == "__main__":
             ret, img, networks, img_postprocess, model_input_img_postprocess = app.read(
                 postprocess_cb=postprocess_cb
             )
-            cv2.imshow("YUV_DNN", img_postprocess)
-            cv2.imshow("DNN", model_input_img_postprocess)
+            if img_postprocess is not None:
+                cv2.imshow("YUV_DNN", img_postprocess)
+            if model_input_img_postprocess is not None:
+                cv2.imshow("DNN", model_input_img_postprocess)
 
             key = cv2.waitKey(1) & 0xFF
             if key == ord('q'):
