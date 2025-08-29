@@ -31,7 +31,7 @@ class ParseMobilenetSSD:
         for i, (box, class_id) in enumerate(zip(boxes, class_ids)):
             color = self.colors[class_id]
 
-            x1, y1, x2, y2 = box.astype(int)
+            y1, x1, y2, x2 = box.astype(int)
 
             # Draw fill mask image
             if mask_maps is None:
@@ -57,7 +57,7 @@ class ParseMobilenetSSD:
 
         for box, score, class_id in zip(boxes, confs, class_ids):
             color = self.colors[class_id]
-            x1, y1, x2, y2 = box.astype(int)
+            y1, x1, y2, x2 = box.astype(int)
 
             cv2.rectangle(mask_img, (x1, y1), (x2, y2), color, thickness=box_thickness)
 
@@ -128,10 +128,10 @@ class ParseMobilenetSSD:
         y_scale = crop_h / dnn_input_h
 
         boxes_yuv = boxes.astype(np.float32)
-        boxes_yuv[:, 0] = boxes_yuv[:, 0] * x_scale + xmin_abs
-        boxes_yuv[:, 2] = boxes_yuv[:, 2] * x_scale + xmin_abs
-        boxes_yuv[:, 1] = boxes_yuv[:, 1] * y_scale + ymin_abs
-        boxes_yuv[:, 3] = boxes_yuv[:, 3] * y_scale + ymin_abs
+        boxes_yuv[:, 0] = boxes_yuv[:, 0] * y_scale + ymin_abs
+        boxes_yuv[:, 2] = boxes_yuv[:, 2] * y_scale + ymin_abs
+        boxes_yuv[:, 1] = boxes_yuv[:, 1] * x_scale + xmin_abs
+        boxes_yuv[:, 3] = boxes_yuv[:, 3] * x_scale + xmin_abs
         boxes_yuv = boxes_yuv.astype(np.int32)
 
         if len(confs) > 0:
