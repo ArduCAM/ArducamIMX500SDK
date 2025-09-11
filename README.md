@@ -17,13 +17,13 @@ pip install your_package_name‑<version>‑<python_version>‑<platform>.whl
 Suppose you are using Windows and Python 3.8, and the downloaded file is:
 
 ```
-arducamimx500sdk‑0.1.1‑cp38‑cp38‑win_amd64.whl
+arducamimx500sdk‑0.1.2‑cp38‑cp38‑win_amd64.whl
 ```
 
 Then run the following command in the terminal:
 
 ```bash
-pip install arducamimx500sdk‑0.1.1‑cp38‑cp38‑win_amd64.whl
+pip install arducamimx500sdk‑0.1.2‑cp38‑cp38‑win_amd64.whl
 ```
 
 
@@ -40,17 +40,17 @@ git submodule update --init --recursive
 
 cd examples
 # mobilenetv2
-python app.py -pm mobilenetv2
+python app.py -pm mobilenetv2 -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 # mobilenetssd
-python app.py -pm mobilenetssd
+python app.py -pm mobilenetssd -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 # yolov8n_det
-python app.py -pm yolov8n_det
+python app.py -pm yolov8n_det -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 # yolov8n_pos
-python app.py -pm yolov8n_pos
+python app.py -pm yolov8n_pos -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 # yolov8n_pos_hand
-python app.py -pm yolov8n_pos_hand
+python app.py -pm yolov8n_pos_hand -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 # deeplabv3plus
-python app.py -pm deeplabv3plus
+python app.py -pm deeplabv3plus -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 ```
 
 ### Command-line Options
