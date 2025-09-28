@@ -10,7 +10,7 @@ def load_labels(filepath):
             if len(parts) == 2:
                 label = parts[1].strip()
                 labels.append(label)
-    return labels
+    return labels[1:]
 
 labels = load_labels("labels/imagenet_labels.txt")
 
