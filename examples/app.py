@@ -30,7 +30,7 @@ pretrain_model_card = {
         "parser": parse_yolov8n_pos,
     },
     "yolov8n_pos_hand": {
-        "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos_hand/network.fpk",
+        "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos_hand/320_320/network.fpk",
         "parser": parse_yolov8n_hand_pos,
     },
     "deeplabv3plus": {
