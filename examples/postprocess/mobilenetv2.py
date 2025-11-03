@@ -12,7 +12,7 @@ def load_labels(filepath):
                 labels.append(label)
     return labels[1:]
 
-labels = load_labels("labels/imagenet_labels.txt")
+labels = load_labels("../labels/imagenet_labels.txt")
 
 def split_text_to_lines(text, max_line_length=20):
     lines = []

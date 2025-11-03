@@ -4,7 +4,7 @@ import numpy as np
 
 class ParseMobilenetSSD:
 
-    def __init__(self, label_file_path="labels/coco_ssd.txt"):
+    def __init__(self, label_file_path="../labels/coco_ssd.txt"):
         self.rng = np.random.default_rng(3)
         self.class_names = self.load_labels(label_file_path)
         self.colors = self.rng.uniform(0, 255, size=(len(self.class_names), 3))
