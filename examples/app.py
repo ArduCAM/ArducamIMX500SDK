@@ -1,41 +1,46 @@
+import os
 import cv2
 import numpy as np
 import argparse
 import traceback
 from ArducamIMX500SDK import IMX500Uvc
-from postprocess.mobilenetv2 import parse_mobilenetv2
-from postprocess.mobilenetssd import ParseMobilenetSSD
-from postprocess.yolov8n_det import ParserYolov8Det
-from postprocess.yolov8n_pos import parse_yolov8n_pos
-from postprocess.yolov8n_pos_hand import parse_yolov8n_hand_pos
-from postprocess.deeplabv3plus import parse_deeplabv3plus
+from postprocess.parse_mobilenetv2 import ParserMobilenetv2
+from postprocess.parse_mobilenetssd import ParserMobilenetSsd
+from postprocess.parse_yolov8n_det import ParserYolov8nDet
+from postprocess.parse_yolov8n_pos import ParserYolov8nPos
+from postprocess.parse_yolov8n_pos_hand import ParserYolov8nPosHand
+from postprocess.parse_deeplabv3plus import ParserDeeplabv3plus
 from postprocess.only_input_tensor import only_input_tensor
 
+
+script_dir_path = os.path.dirname(__file__)
+root_dir_path = os.path.join(script_dir_path, '..')
+labels_dir_path = os.path.join(root_dir_path, 'labels')
 
 pretrain_model_card = {
     "mobilenetv2": {
         "weights": "../model/arducam_imx500_model_zoo/mobilenetv2/network.fpk",
-        "parser": parse_mobilenetv2,
+        "parser": ParserMobilenetv2(os.path.join(labels_dir_path, 'imagenet_labels.txt')),
     },
     "mobilenetssd": {
         "weights": "../model/arducam_imx500_model_zoo/mobilenetssd/network.fpk",
-        "parser": ParseMobilenetSSD(),
+        "parser": ParserMobilenetSsd(os.path.join(labels_dir_path, 'coco_ssd.txt')),
     },
     "yolov8n_det": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_det/network.fpk",
-        "parser": ParserYolov8Det(),
+        "parser": ParserYolov8nDet(os.path.join(labels_dir_path, 'coco.txt')),
     },
     "yolov8n_pos": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos/network.fpk",
-        "parser": parse_yolov8n_pos,
+        "parser": ParserYolov8nPos(),
     },
     "yolov8n_pos_hand": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos_hand/320_320/network.fpk",
-        "parser": parse_yolov8n_hand_pos,
+        "parser": ParserYolov8nPosHand(),
     },
     "deeplabv3plus": {
         "weights": "../model/arducam_imx500_model_zoo/deeplabv3plus/network.fpk",
-        "parser": parse_deeplabv3plus,
+        "parser": ParserDeeplabv3plus(),
     },
 }
 

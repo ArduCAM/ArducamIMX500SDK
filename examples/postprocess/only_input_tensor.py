@@ -1,8 +1,20 @@
+import os
 import cv2
-import numpy as np
+try:
+    from logger import logger
+except ImportError:
+    class _SimpleLogger:
+        def debug(self, msg):
+            print(f"[DEBUG] {msg}")
 
+        def info(self, msg):
+            print(f"[INFO] {msg}")
 
-def only_input_tensor(network, img):
+        def warn(self, msg):
+            print(f"[WARN] {msg}")
+    logger = _SimpleLogger()
+
+def only_input_tensor(network, img, score_thr=0.5, is_show_input_tensor=False, is_show_img=False, is_print_fps=False, nn_input_map=(0.0, 0.0, 1.0, 1.0)):
 
     dnn_input_img = network[0].input_tensors[0].data.copy()
     if dnn_input_img is None:
@@ -22,7 +34,7 @@ def only_input_tensor(network, img):
     
     dnn_output_tensor = network[0].output_tensors[0].data
     if dnn_output_tensor is None:
-        print("warning: Output tensor is None")
+        logger.warning("Output tensor is None")
         return None, None
     
     return img, dnn_input_img
