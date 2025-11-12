@@ -82,7 +82,7 @@ options:
 ## GUI
 
 [ArducamIMX500UvcTool.exe](https://github.com/ArduCAM/ArducamIMX500SDK/releases/latest/download/ArducamIMX500UvcTool_Release.exe
-) a GUI tool developed based on the ArducamIMX500SDK, used for quickly evaluating AI functions. Please download the software to this project directory and refer to [ArdcuamIMX500UvcTool_UserManual.md](docs/ArducamIMX500UvcTool_UserManual.md) for usage instructions.
+) is a GUI tool developed based on the ArducamIMX500SDK, used for quickly evaluating AI functions. Please download the software to this project directory and refer to [ArdcuamIMX500UvcTool_UserManual.md](docs/ArducamIMX500UvcTool_UserManual.md) for usage instructions.
 
 ## Ready for Advanced Development
 
