@@ -17,13 +17,13 @@ pip install your_package_name‑<version>‑<python_version>‑<platform>.whl
 Suppose you are using Windows and Python 3.8, and the downloaded file is:
 
 ```
-arducamimx500sdk‑0.1.2‑cp38‑cp38‑win_amd64.whl
+arducamimx500sdk‑1.1.1‑cp38‑cp38‑win_amd64.whl
 ```
 
 Then run the following command in the terminal:
 
 ```bash
-pip install arducamimx500sdk‑0.1.2‑cp38‑cp38‑win_amd64.whl
+pip install arducamimx500sdk‑1.1.1‑cp38‑cp38‑win_amd64.whl
 ```
 
 
@@ -79,6 +79,10 @@ options:
                         Rect crop area in absolute xyxy format. X range: 0-4056, Y range: 0-3040.
 ```
 
+## GUI
+
+[ArducamIMX500UvcTool.exe](https://github.com/ArduCAM/ArducamIMX500SDK/releases/latest/download/ArducamIMX500UvcTool_Release.exe
+) a GUI tool developed based on the ArducamIMX500SDK, used for quickly evaluating AI functions. Please download the software to this project directory and refer to [ArdcuamIMX500UvcTool_UserManual.md](docs/ArducamIMX500UvcTool_UserManual.md) for usage instructions.
 
 ## Ready for Advanced Development
 
