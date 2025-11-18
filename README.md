@@ -5,13 +5,17 @@
 ## Overview
 
 ![](pics/flow.svg)
+
+---
+
 | Function | Support |
 |----------|---------|
 |Model input type| RGB, Y, YUV444, BGR, BAYER|
 | Data injection image type | .jpg, .jpeg, .png, .bmp, .tif, .tiff, .webp, .ppm, .pgm, .pbm |
 |Model config file| Config preprocess of input image by network_info.txt |
 |Multi Model FPK| support |
-| Model Size (quantified) | < 8 MB |
+| Model Size (quantified) | <= 8 MB |
+| Model input data size (uint8) | <= 640 x 480 x 3 |
 | Task Converage | classification, object detection, pose estimation, segmentation |
 ## Install
 
