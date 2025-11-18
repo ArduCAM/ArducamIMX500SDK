@@ -2,6 +2,17 @@
 
 <img src="https://www.arducam.com/wp-content/uploads/2023/07/logo-4.png" width="100%" />
 
+## Overview
+
+![](pics/flow.svg)
+| Function | Support |
+|----------|---------|
+|Model input type| RGB, Y, YUV444, BGR, BAYER|
+| Data injection image type | .jpg, .jpeg, .png, .bmp, .tif, .tiff, .webp, .ppm, .pgm, .pbm |
+|Model config file| Config preprocess of input image by network_info.txt |
+|Multi Model FPK| support |
+| Model Size (quantified) | < 8 MB |
+| Task Converage | classification, object detection, pose estimation, segmentation |
 ## Install
 
 Please visit the [Releases](https://github.com/ArduCAM/ArducamIMX500SDK/releases/latest) page and download the corresponding `.whl` installation package based on your operating system and Python version.
@@ -17,13 +28,13 @@ pip install your_package_name‑<version>‑<python_version>‑<platform>.whl
 Suppose you are using Windows and Python 3.8, and the downloaded file is:
 
 ```
-arducamimx500sdk‑1.1.1‑cp38‑cp38‑win_amd64.whl
+arducamimx500sdk‑1.2.0‑cp38‑cp38‑win_amd64.whl
 ```
 
 Then run the following command in the terminal:
 
 ```bash
-pip install arducamimx500sdk‑1.1.1‑cp38‑cp38‑win_amd64.whl
+pip install arducamimx500sdk‑1.2.0‑cp38‑cp38‑win_amd64.whl
 ```
 
 
@@ -56,7 +67,8 @@ python app.py -pm deeplabv3plus -lf ..\firmware\arducam_imx500\loader.fpk -mf ..
 ### Command-line Options
 
 ```bash
-usage: app.py [-h] [-wf] [-lf LOADER_FIRMWARE] [-mf MAIN_FIRMWARE] [-m MODEL] [-pm PRETRAIN_MODEL] [-d DEVICE_ID] [-dy] [-dyr] [-di DATA_INJECTION] [--rect-crop XMIN YMIN XMAX YMAX]
+usage: app.py [-h] [-wf] [-lf LOADER_FIRMWARE] [-mf MAIN_FIRMWARE] [-m MODEL] [-pm PRETRAIN_MODEL] [-d DEVICE_ID] [-dy]
+              [-dyr] [-di DATA_INJECTION] [--network-info NETWORK_INFO] [--rect-crop XMIN YMIN XMAX YMAX]
 
 options:
   -h, --help            show this help message and exit
@@ -75,6 +87,8 @@ options:
   -dyr, --dump-yuv-raw  Dump raw YUV.
   -di DATA_INJECTION, --data-injection DATA_INJECTION
                         Data injection.
+  --network-info NETWORK_INFO
+                        network_info.txt path
   --rect-crop XMIN YMIN XMAX YMAX
                         Rect crop area in absolute xyxy format. X range: 0-4056, Y range: 0-3040.
 ```

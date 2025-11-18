@@ -56,6 +56,7 @@ def parse_cmdline():
     parser.add_argument('-dy', '--dump-yuv', action='store_true', required=False, help='Dump YUV.')
     parser.add_argument('-dyr', '--dump-yuv-raw', action='store_true', required=False, help='Dump raw YUV.')
     parser.add_argument('-di', '--data-injection', type=str, required=False, help='Data injection.')
+    parser.add_argument('--network-info', type=str, required=False, help='network_info.txt path')
     parser.add_argument('--rect-crop', type=int, nargs=4, metavar=('XMIN', 'YMIN', 'XMAX', 'YMAX'),
                         help='Rect crop area in absolute xyxy format. '
                         'X range: 0-4056, Y range: 0-3040.')
@@ -71,6 +72,7 @@ if __name__ == "__main__":
     main_firmware_path = args.main_firmware
     model_path = args.model
     pretrain_model_name = args.pretrain_model
+    network_info = args.network_info
     if model_path is None:
         if pretrain_model_name is not None:
             model_path = pretrain_model_card[pretrain_model_name]["weights"]
@@ -96,7 +98,8 @@ if __name__ == "__main__":
         loader_firmware_path=loader_firmware_path,
         main_firmware_path=main_firmware_path,
         model_path=model_path,
-        is_flash_write_required=is_flash_write_required
+        is_flash_write_required=is_flash_write_required,
+        network_info_file_path=network_info
     )
     
     print(app.get_fw_version())
