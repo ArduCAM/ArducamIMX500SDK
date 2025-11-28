@@ -68,6 +68,18 @@ python app.py -pm yolov8n_pos_hand -lf ..\firmware\arducam_imx500\loader.fpk -mf
 python app.py -pm deeplabv3plus -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
 ```
 
+### Sample App
+
+```bash
+git submodule update --init --recursive
+
+cd examples
+# geofencing
+python app.py -dp geofencing -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
+# detect and count package
+python app.py -dp package -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmware\arducam_imx500\firmware.fpk
+```
+
 ### Command-line Options
 
 ```bash
