@@ -71,8 +71,8 @@ python app.py -pm deeplabv3plus -lf ..\firmware\arducam_imx500\loader.fpk -mf ..
 ### Command-line Options
 
 ```bash
-usage: app.py [-h] [-wf] [-lf LOADER_FIRMWARE] [-mf MAIN_FIRMWARE] [-m MODEL] [-pm PRETRAIN_MODEL] [-d DEVICE_ID] [-dy]
-              [-dyr] [-di DATA_INJECTION] [--network-info NETWORK_INFO] [--rect-crop XMIN YMIN XMAX YMAX]
+usage: app.py [-h] [-wf] [-lf LOADER_FIRMWARE] [-mf MAIN_FIRMWARE] [-m MODEL] [-dp DEMO_PROJECT] [-pm PRETRAIN_MODEL]
+              [-d DEVICE_ID] [-dy] [-dyr] [-di DATA_INJECTION] [--network-info NETWORK_INFO] [--rect-crop XMIN YMIN XMAX YMAX]   
 
 options:
   -h, --help            show this help message and exit
@@ -83,6 +83,8 @@ options:
                         Main firmware path.
   -m MODEL, --model MODEL
                         Model path.
+  -dp DEMO_PROJECT, --demo-project DEMO_PROJECT
+                        Demo project name.
   -pm PRETRAIN_MODEL, --pretrain-model PRETRAIN_MODEL
                         Pretrain model name.
   -d DEVICE_ID, --device-id DEVICE_ID
