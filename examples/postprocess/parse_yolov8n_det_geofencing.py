@@ -224,7 +224,7 @@ class ParserYolov8nDetGeofencing:
         confs = confs[confs_mask]
         cls_ids = cls_ids[confs_mask]
 
-        cls_ids_mask = cls_ids == 1
+        cls_ids_mask = cls_ids == 0
         boxes = boxes[cls_ids_mask, :]
         confs = confs[cls_ids_mask]
         cls_ids = cls_ids[cls_ids_mask]
