@@ -118,7 +118,8 @@ if __name__ == "__main__":
         main_firmware_path=main_firmware_path,
         model_path=model_path,
         is_flash_write_required=is_flash_write_required,
-        network_info_file_path=network_info
+        network_info_file_path=network_info,
+        fps=20
     )
     
     print(app.get_fw_version())
