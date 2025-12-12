@@ -53,13 +53,13 @@ def vis(img, boxes, scores, cls_ids, keypoints, class_names=["hand"], obejct_det
         cls_id = int(cls_ids[i])
         keypoints_raw = keypoints[i]
 
-        # 坐标映射
+        # Coordinate mapping
         x0 = int(box[0])
         y0 = int(box[1])
         x1 = int((box[0] + box[2]))
         y1 = int((box[1] + box[3]))
 
-        # 绘制检测框与标签
+        # Draw the detection box and label
         color = (COLORS[cls_id] * 255).astype(np.uint8).tolist()
         text = f"hand:{scores[i] * 100:.1f}%"
         txt_color = (0, 0, 0) if np.mean(COLORS[cls_id]) > 0.5 else (255, 255, 255)
@@ -70,17 +70,17 @@ def vis(img, boxes, scores, cls_ids, keypoints, class_names=["hand"], obejct_det
         cv2.rectangle(img, (x0, y0 + 1), (x0 + txt_size[0] + 2, y0 + int(1.5 * txt_size[1])), txt_bk_color, -1)
         cv2.putText(img, text, (x0, y0 + txt_size[1]), font, font_scale, txt_color, text_thickness)
 
-        # 构造关键点对象
+        # Construct keypoint objects
         kps = [KeyPoint(keypoints_raw[j*3], keypoints_raw[j*3+1], keypoints_raw[j*3+2]) for j in range(21)]
 
-        # 绘制关键点
+        # Draw key points
         for kp in kps:
             if kp.score >= 0.2:
                 x = int(kp.x)
                 y = int(kp.y)
                 cv2.circle(img, (x, y), kpt_radius, (0, 0, 255), -1)
 
-        # 绘制骨架连线
+        # Draw skeleton connections
         def draw_lines(lines):
             for a, b in lines:
                 ka, kb = kps[a], kps[b]
@@ -126,19 +126,11 @@ class ParserYolov8nPosHand:
         if dnn_output_tensor is None:
             logger.warning("Output tensor is None")
             return None, None
-        
-        # for i, tensor in enumerate(network[0].input_tensors):
-        #     input_data = tensor.data
-        #     logger.debug(f"Input tensor {i} shape: {input_data.shape}")
-
-        # for i, tensor in enumerate(network[0].output_tensors):
-        #     output_data = tensor.data
-        #     logger.debug(f"Output tensor {i} shape: {output_data.shape}")
             
-        boxes = network[0].output_tensors[0].data  # shape: (300, 4)
-        scores = network[0].output_tensors[1].data  # shape: (300,)
-        cls_ids = network[0].output_tensors[2].data  # shape: (300,)
-        keypoints = network[0].output_tensors[3].data  # shape: (300, 51)
+        boxes = network[0].output_tensors[0].data
+        scores = network[0].output_tensors[1].data
+        cls_ids = network[0].output_tensors[2].data
+        keypoints = network[0].output_tensors[3].data
         
         crop_xmin_abs = int(nn_input_map[0] * img.shape[1])
         crop_ymin_abs = int(nn_input_map[1] * img.shape[0])

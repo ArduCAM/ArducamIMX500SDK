@@ -67,7 +67,6 @@ def draw_warning_light(im: np.ndarray, intruded: bool, intruder_count: int = 0) 
     cv2.putText(im, txt, (center[0]-tw//2, center[1]+radius+th+6),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, CLR_WHITE, 2, cv2.LINE_AA)
 
-    # 在指示灯下面显示闯入目标数量
     count_txt = f"COUNT: {intruder_count}"
     (ctw, cth), _ = cv2.getTextSize(count_txt, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 2)
     cv2.putText(im, count_txt,
