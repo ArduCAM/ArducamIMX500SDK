@@ -12,7 +12,7 @@ except ImportError:
         def info(self, msg):
             print(f"[INFO] {msg}")
 
-        def warn(self, msg):
+        def warning(self, msg):
             print(f"[WARN] {msg}")
     logger = _SimpleLogger()
 
