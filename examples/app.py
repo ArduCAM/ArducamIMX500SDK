@@ -22,38 +22,54 @@ labels_dir_path = os.path.join(root_dir_path, 'labels')
 pretrain_model_card = {
     "mobilenetv2": {
         "weights": "../model/arducam_imx500_model_zoo/mobilenetv2/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/mobilenetv2/network_info.txt",
         "parser": ParserMobilenetv2(os.path.join(labels_dir_path, 'imagenet_labels.txt')),
+        "fps": 20,
     },
     "mobilenetssd": {
         "weights": "../model/arducam_imx500_model_zoo/mobilenetssd/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/mobilenetssd/network_info.txt",
         "parser": ParserMobilenetSsd(os.path.join(labels_dir_path, 'coco_ssd.txt')),
+        "fps": 20,
     },
     "yolov8n_det": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_det/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/yolov8n_det/network_info.txt",
         "parser": ParserYolov8nDet(os.path.join(labels_dir_path, 'coco.txt')),
+        "fps": 10,
     },
     "yolov8n_pos": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/yolov8n_pos/network_info.txt",
         "parser": ParserYolov8nPos(),
+        "fps": 10,
     },
     "yolov8n_pos_hand": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_pos_hand/320_320/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/yolov8n_pos_hand/network_info.txt",
         "parser": ParserYolov8nPosHand(),
+        "fps": 10,
     },
     "deeplabv3plus": {
         "weights": "../model/arducam_imx500_model_zoo/deeplabv3plus/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/deeplabv3plus/network_info.txt",
         "parser": ParserDeeplabv3plus(),
+        "fps": 10,
     },
 }
 
 demo_project_card = {
     "geofencing": {
         "weights": "../model/arducam_imx500_model_zoo/yolov8n_det/network.fpk",
+        "network_info": "../model/arducam_imx500_model_zoo/yolov8n_det/network_info.txt",
         "parser": ParserYolov8nDetGeofencing(os.path.join(labels_dir_path, 'coco.txt')),
+        "fps": 10,
     },
     "package": {
         "weights": "../model/arducam_imx500_model_zoo/research/yolov8n_det_label_package/network.fpk",
+        "weights": "../model/arducam_imx500_model_zoo/research/yolov8n_det_label_package/network_info.txt",
         "parser": ParserYolov8nDetLabelPackage(os.path.join(labels_dir_path, 'label_package.txt')),
+        "fps": 10,
     },
 }
 
@@ -74,6 +90,7 @@ def parse_cmdline():
     parser.add_argument('--rect-crop', type=int, nargs=4, metavar=('XMIN', 'YMIN', 'XMAX', 'YMAX'),
                         help='Rect crop area in absolute xyxy format. '
                         'X range: 0-4056, Y range: 0-3040.')
+    parser.add_argument('--fps', type=int, default=20, required=False, help='Framerate')
 
     args = parser.parse_args()
     return args
@@ -88,6 +105,7 @@ if __name__ == "__main__":
     pretrain_model_name = args.pretrain_model
     network_info = args.network_info
     demo_project = args.demo_project
+    fps = int(max(0, args.fps))
     if demo_project is not None:
         model_path = demo_project_card[demo_project]["weights"]
         postprocess_cb = demo_project_card[demo_project]["parser"]
@@ -95,10 +113,14 @@ if __name__ == "__main__":
         if model_path is None:
             if pretrain_model_name is not None:
                 model_path = pretrain_model_card[pretrain_model_name]["weights"]
+                network_info = pretrain_model_card[pretrain_model_name]["network_info"]
                 postprocess_cb = pretrain_model_card[pretrain_model_name]["parser"]
+                fps = pretrain_model_card[pretrain_model_name]["fps"]
             else:
                 model_path = pretrain_model_card["mobilenetssd"]["weights"]
+                network_info = pretrain_model_card[pretrain_model_name]["network_info"]
                 postprocess_cb = pretrain_model_card["mobilenetssd"]["parser"]
+                fps = pretrain_model_card[pretrain_model_name]["fps"]
         else:
             postprocess_cb = only_input_tensor
     device_index = args.device_id
@@ -119,7 +141,7 @@ if __name__ == "__main__":
         model_path=model_path,
         is_flash_write_required=is_flash_write_required,
         network_info_file_path=network_info,
-        fps=20
+        fps=fps if fps else 20
     )
     
     print(app.get_fw_version())
@@ -137,6 +159,7 @@ if __name__ == "__main__":
             ret, img, networks, img_postprocess, model_input_img_postprocess = app.read(
                 postprocess_cb=postprocess_cb
             )
+            
             if img_postprocess is not None:
                 cv2.imshow("YUV_DNN", img_postprocess)
             if model_input_img_postprocess is not None:

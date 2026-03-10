@@ -84,31 +84,32 @@ python app.py -dp package -lf ..\firmware\arducam_imx500\loader.fpk -mf ..\firmw
 
 ```bash
 usage: app.py [-h] [-wf] [-lf LOADER_FIRMWARE] [-mf MAIN_FIRMWARE] [-m MODEL] [-dp DEMO_PROJECT] [-pm PRETRAIN_MODEL]
-              [-d DEVICE_ID] [-dy] [-dyr] [-di DATA_INJECTION] [--network-info NETWORK_INFO] [--rect-crop XMIN YMIN XMAX YMAX]   
+              [-d DEVICE_ID] [-dy] [-dyr] [-di DATA_INJECTION] [--network-info NETWORK_INFO]
+              [--rect-crop XMIN YMIN XMAX YMAX] [--fps FPS]
 
 options:
   -h, --help            show this help message and exit
   -wf, --write-flash    Flag of flash write.
-  -lf LOADER_FIRMWARE, --loader-firmware LOADER_FIRMWARE
+  -lf, --loader-firmware LOADER_FIRMWARE
                         Loader firmware path.
-  -mf MAIN_FIRMWARE, --main-firmware MAIN_FIRMWARE
+  -mf, --main-firmware MAIN_FIRMWARE
                         Main firmware path.
-  -m MODEL, --model MODEL
-                        Model path.
-  -dp DEMO_PROJECT, --demo-project DEMO_PROJECT
+  -m, --model MODEL     Model path.
+  -dp, --demo-project DEMO_PROJECT
                         Demo project name.
-  -pm PRETRAIN_MODEL, --pretrain-model PRETRAIN_MODEL
+  -pm, --pretrain-model PRETRAIN_MODEL
                         Pretrain model name.
-  -d DEVICE_ID, --device-id DEVICE_ID
+  -d, --device-id DEVICE_ID
                         Device Index. (default: 0)
   -dy, --dump-yuv       Dump YUV.
   -dyr, --dump-yuv-raw  Dump raw YUV.
-  -di DATA_INJECTION, --data-injection DATA_INJECTION
+  -di, --data-injection DATA_INJECTION
                         Data injection.
   --network-info NETWORK_INFO
-                         network_info.txt path
+                        network_info.txt path
   --rect-crop XMIN YMIN XMAX YMAX
-                         Rect crop area in absolute xyxy format. X range: 0-4056, Y range: 0-3040.
+                        Rect crop area in absolute xyxy format. X range: 0-4056, Y range: 0-3040.
+  --fps FPS             Framerate
 ```
 
 ### Data Injection Export Example
